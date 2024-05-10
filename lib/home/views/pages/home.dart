@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconly/iconly.dart';
 import 'package:moniepoint_test/app/theme/colors.dart';
 import 'package:moniepoint_test/app/theme/theme.dart';
 
@@ -62,7 +63,7 @@ final AppBar homeAppBar = AppBar(
         fontWeight: FontWeight.bold,
       ),
       prefixIcon: const Icon(
-        Icons.location_on,
+        IconlyBold.location,
         size: 30,
         color: kDefaultGrey,
       ),

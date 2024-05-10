@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:iconly/iconly.dart';
 import 'package:moniepoint_test/app/theme/colors.dart';
 import 'package:moniepoint_test/app/theme/theme.dart';
 import 'package:moniepoint_test/home/cubit/home_cubit.dart';
@@ -51,10 +52,12 @@ class _SearchViewState extends State<SearchView> {
     setState(() {
       loading = true;
     });
-    await updateMarkers();
     final style = await rootBundle.loadString('assets/data/map_style.json');
     setState(() {
       _mapStyleString = style;
+    });
+    await updateMarkers();
+    setState(() {
       loading = false;
     });
   }
@@ -143,19 +146,19 @@ final Widget searchBar = Padding(
           placeholder: kListings.first.city,
           borderRadius: BorderRadius.circular(100),
           placeholderStyle: TextStyle(
-            color: kDefaultBlack,
+            color: kDefaultGrey,
             fontFamily: kDefaultFontFamily,
             fontWeight: FontWeight.bold,
           ),
           style: TextStyle(
-            color: kDefaultBlack,
+            color: kDefaultGrey,
             fontFamily: kDefaultFontFamily,
             fontWeight: FontWeight.bold,
           ),
           prefixIcon: const Icon(
-            Icons.search,
-            size: 30,
-            color: kDefaultBlack,
+            IconlyBold.search,
+            // size: 30,
+            color: kDefaultGrey,
           ),
           backgroundColor: kDefaultWhite,
         ),
@@ -181,49 +184,3 @@ final Widget searchBar = Padding(
     ],
   ),
 );
-
-// AppBar(
-//   centerTitle: false,
-//   toolbarHeight: 80,
-//   title: SizedBox(
-//     height: 50,
-    // child: CupertinoSearchTextField(
-    //   placeholder: kListings.first.city,
-    //   borderRadius: BorderRadius.circular(100),
-    //   placeholderStyle: TextStyle(
-    //     color: kDefaultBlack,
-    //     fontFamily: kDefaultFontFamily,
-    //     fontWeight: FontWeight.bold,
-    //   ),
-    //   style: TextStyle(
-    //     color: kDefaultBlack,
-    //     fontFamily: kDefaultFontFamily,
-    //     fontWeight: FontWeight.bold,
-    //   ),
-    //   prefixIcon: const Icon(
-    //     Icons.search,
-    //     size: 30,
-    //     color: kDefaultBlack,
-    //   ),
-    //   backgroundColor: kDefaultWhite,
-    // ),
-//   ),
-//   actions: [
-    // Padding(
-    //   padding: const EdgeInsets.all(8),
-    //   child: InkWell(
-    //     onTap: () => log('Settings'),
-    //     child: const CircleAvatar(
-    //       radius: 30,
-    //       backgroundColor: kDefaultWhite,
-    //       child: Icon(
-    //         Icons.settings_suggest_outlined,
-    //         color: kDefaultBlack,
-    //         size: 30,
-    //       ),
-    //     ),
-    //   ),
-    // ),
-//   ],
-//   backgroundColor: Colors.transparent,
-// );
