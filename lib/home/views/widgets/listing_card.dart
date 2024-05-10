@@ -40,8 +40,8 @@ class ListingCard extends StatelessWidget {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
+              horizontal: 12,
+              vertical: 12,
             ),
             child: Container(
               decoration: BoxDecoration(
