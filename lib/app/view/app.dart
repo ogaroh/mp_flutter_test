@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moniepoint_test/app/theme/theme.dart';
-import 'package:moniepoint_test/home/views/pages/home.dart';
+import 'package:moniepoint_test/home/views/pages/search.dart';
 import 'package:moniepoint_test/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -8,11 +8,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = View.of(context).platformDispatcher.platformBrightness;
+
+    final textTheme = createTextTheme(context, 'Poppins', 'Poppins');
+       final theme = MaterialTheme(textTheme);
+
     return MaterialApp(
-      theme: theme,
+      theme: brightness == Brightness.light ? theme.light() : theme.dark(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const HomePage(),
+      // home: const HomePage(),
+      home: const SearchPage(),
     );
   }
 }

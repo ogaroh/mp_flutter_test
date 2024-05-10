@@ -35,7 +35,7 @@ class HomeView extends StatelessWidget {
       width: width,
       decoration: const BoxDecoration(gradient: kDefaultLinearGradient),
       child: Scaffold(
-        extendBody: true,
+        backgroundColor: Colors.transparent,
         appBar: homeAppBar,
         body: const HomeBody(),
       ),
