@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'dart:developer' as dev;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:moniepoint_test/app/theme/theme.dart';
 import 'package:moniepoint_test/home/cubit/home_cubit.dart';
 import 'package:moniepoint_test/home/data/models/listing.dart';
 import 'package:moniepoint_test/home/data/sources/local.dart';
+import 'package:moniepoint_test/home/views/widgets/listing_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -75,7 +75,7 @@ final AppBar homeAppBar = AppBar(
       child: CircleAvatar(
         radius: 30,
         backgroundColor: kDefaultOrange,
-        backgroundImage: AssetImage('assets/images/portrait.png'),
+        backgroundImage: AssetImage('assets/images/png/portrait.png'),
       ),
     ),
   ],
@@ -88,27 +88,27 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-
-    return Container(
-      height: height / 6,
-      padding: const EdgeInsets.symmetric(horizontal: 3),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      ),
       child: RichText(
         text: TextSpan(
-          text: 'Hi, Marina\n',
+          text: 'Hi, Erick\n',
           children: [
             TextSpan(
               text: "let's select your perfect place",
               style: TextStyle(
                 color: kDefaultBlack,
-                fontSize: 33,
+                fontSize: 30,
                 fontFamily: kDefaultFontFamily,
               ),
             ),
           ],
           style: TextStyle(
             color: kDefaultGrey,
-            fontSize: 30,
+            fontSize: 20,
             fontFamily: kDefaultFontFamily,
           ),
         ),
@@ -123,22 +123,28 @@ class BuyRentButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        BuyButton(
-          listings: kListings
-              .where((listing) => listing.type == ListingType.purchase)
-              .toList()
-              .length,
-        ),
-        RentButton(
-          listings: kListings
-              .where((listing) => listing.type == ListingType.rental)
-              .toList()
-              .length,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          BuyButton(
+            listings: kListings
+                .where((listing) => listing.type == ListingType.purchase)
+                .toList()
+                .length,
+          ),
+          RentButton(
+            listings: kListings
+                .where((listing) => listing.type == ListingType.rental)
+                .toList()
+                .length,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -153,7 +159,7 @@ class BuyButton extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return InkWell(
-      onTap: () => log('Buy button pressed'),
+      onTap: () => dev.log('Buy button pressed'),
       child: CircleAvatar(
         radius: width / 4.8,
         backgroundColor: kDefaultOrange,
@@ -200,7 +206,7 @@ class RentButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: InkWell(
-        onTap: () => log('Rent button pressed'),
+        onTap: () => dev.log('Rent button pressed'),
         child: Container(
           width: width / 2.4,
           height: width / 2.4,
@@ -243,6 +249,60 @@ class RentButton extends StatelessWidget {
   }
 }
 
+// listings
+class Listings extends StatelessWidget {
+  const Listings({super.key});
+
+  List<Widget> _buildListings() {
+    final tiles = <Widget>[];
+    for (var i = 0; i < kListings.length; i += 2) {
+      if (i == 0 || i == kListings.length - 1) {
+        tiles.add(
+          ListingCard(
+            listing: kListings[i],
+            isWide: true,
+          ),
+        );
+      } else {
+        tiles.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ListingCard(
+                listing: kListings[i],
+                isWide: false,
+              ),
+              ListingCard(
+                listing: kListings[i + 1],
+                isWide: false,
+              ),
+            ],
+          ),
+        );
+      }
+    }
+    return tiles;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
+        color: kDefaultWhite,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: _buildListings(),
+      ),
+    );
+  }
+}
+
 // home body
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -250,17 +310,12 @@ class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 16,
-        ),
-        child: Column(
-          children: [
-            Header(),
-            BuyRentButtons(),
-          ],
-        ),
+      child: Column(
+        children: [
+          Header(),
+          BuyRentButtons(),
+          Listings(),
+        ],
       ),
     );
   }

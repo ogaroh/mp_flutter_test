@@ -1,6 +1,18 @@
 // local data
 import 'package:moniepoint_test/home/data/models/listing.dart';
 
+String root = 'assets/images/jpg';
+
+final kImages = [
+  '$root/belair.jpg',
+  '$root/cottage.jpg',
+  '$root/interior.jpg',
+  '$root/penthouse.jpg',
+  '$root/modern.jpg',
+  '$root/pool.jpg',
+  '$root/apartment.jpeg',
+];
+
 final kListings = [
   Listing(
     id: 1,
@@ -10,6 +22,7 @@ final kListings = [
     longitude: 36.800283,
     city: 'Nairobi',
     price: 200000,
+
   ),
   Listing(
     id: 2,

@@ -18,6 +18,7 @@ const kDefaultLinearGradient = LinearGradient(
 
 final theme = ThemeData(
   primaryColor: kDefaultOrange,
+  primarySwatch: primarySwatch(),
   useMaterial3: true,
   fontFamily: kDefaultFontFamily,
   scaffoldBackgroundColor: Colors.transparent,
