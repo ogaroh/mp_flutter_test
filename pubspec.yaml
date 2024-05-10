@@ -14,7 +14,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   google_fonts: ^6.2.1
+  google_maps_flutter: ^2.6.1
   intl: ^0.18.1
+  widget_to_marker: ^1.0.4
 
 dev_dependencies:
   bloc_test: ^9.1.6
@@ -28,6 +30,7 @@ flutter:
   generate: true
   assets:
     - assets/
+    - assets/data/
     - assets/images/
     - assets/images/png/
     - assets/images/jpg/
