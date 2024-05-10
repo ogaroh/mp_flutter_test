@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moniepoint_test/app/theme/theme.dart';
-import 'package:moniepoint_test/counter/counter.dart';
+import 'package:moniepoint_test/home/views/pages/home.dart';
 import 'package:moniepoint_test/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -12,7 +12,7 @@ class App extends StatelessWidget {
       theme: theme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const HomePage(),
     );
   }
 }
